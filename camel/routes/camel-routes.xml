@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route id="jetty-route">
+        <from uri="jetty:http://0.0.0.0:9091/hello?matchOnUriPrefix=true&amp;enableJmx=true&amp;disableStreamCache=true&amp;enableCORS=true&amp;optionsEnabled=true&amp;muteException=true" />
+        <log message="Received request on /hello"/>
+        <transform>
+            <simple>Jetty on port 9091!</simple>
+        </transform>
+        <to uri="log:out"/>
+    </route>
+    <route id="netty-route">
+        <from uri="netty-http:http://0.0.0.0:9092/hello?matchOnUriPrefix=true&amp;enableJmx=true&amp;disableStreamCache=true&amp;enableCORS=true&amp;optionsEnabled=true&amp;muteException=true"/>
+        <transform>
+            <simple>Netty on port 9092!</simple>
+        </transform>
+        <to uri="log:info"/>
+    </route>
+</routes>

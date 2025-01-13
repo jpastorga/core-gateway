@@ -1,0 +1,11 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+    <route id="jetty-route">
+        <!-- Escucha en el puerto 8080 en la ruta /hello -->
+        <from uri="jetty:http://0.0.0.0:9091/hello?matchOnUriPrefix=true&amp;enableJmx=true&amp;disableStreamCache=true&amp;enableCORS=true&amp;optionsEnabled=true&amp;muteException=true" />
+        <log message="Received request on /hello"/>
+        <transform>
+            <simple>Hello from Jetty on port 8080!</simple>
+        </transform>
+        <to uri="log:out"/>
+    </route>
+</routes>
